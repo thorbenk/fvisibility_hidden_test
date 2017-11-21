@@ -18,6 +18,8 @@ void assert_eq(int a, int b)
     }
 }
 
+extern template class C<long>;
+
 int main() {
     TestLib t;
     assert_eq(TestLib::where_static() , IN_LIB);

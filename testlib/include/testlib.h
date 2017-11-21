@@ -64,5 +64,4 @@ public:
     }
 };
 template class C<int>;
-extern template class C<long>;
-// C<long> is instantiated in .cpp file
+// C<long> is instantiated in .cpp file and declared extern in main.cpp
