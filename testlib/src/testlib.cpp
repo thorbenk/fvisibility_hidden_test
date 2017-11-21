@@ -8,8 +8,7 @@ int TestLib::where() {
     return DEFINED_WHERE;
 }
 
-int TestLib::where_static()
-{
+int TestLib::where_static() {
     return DEFINED_WHERE;
 }
 
