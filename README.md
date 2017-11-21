@@ -1,5 +1,13 @@
 # -fvisiblity=hidden example project (cmake)
 
+A simple CMake project consisting of a shared library and an executable
+linked to that library. Uses `-fvisibility=hiden` and
+`-fvisiblity-inlines-hidden`.
+
+Gives some examples how to export explicit template instantiations
+in the library and how to make sure these instantiations are used in
+the executable.
+
 Resources:
 
 - [A quick intro to extern templates](http://blog.bitwigglers.org/extern-templates/)
