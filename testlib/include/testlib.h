@@ -20,7 +20,9 @@ class TESTLIB_EXPORT TestLib
 {
 public:
     static int where_static();
+
     int where();
+    inline int where_inline() { return DEFINED_WHERE; }
 };
 
 //-----------------------------------------------------------------------------

@@ -10,22 +10,33 @@ using namespace std;
 #define IN_LIB  0
 #define IN_MAIN 1
 
+void assert_eq(int a, int b)
+{
+    if (a != b) {
+        cout << "failed!" << endl;
+        exit(1);
+    }
+}
+
 int main() {
     TestLib t;
-    assert(t.where() == IN_LIB);
-    assert(TestLib::where_static() == IN_LIB);
+    assert_eq(TestLib::where_static() , IN_LIB);
+    assert_eq(t.where() , IN_LIB);
+    assert_eq(t.where_inline() , IN_MAIN);
 
-    assert(A<int>().where() == IN_LIB);
-    assert(A<long>().where() == IN_LIB);
-    assert(A<float>().where() == IN_MAIN);
+    assert_eq(A<int>().where() , IN_LIB);
+    assert_eq(A<long>().where() , IN_LIB);
+    assert_eq(A<float>().where() , IN_MAIN);
 
-    assert(B<int>().where() == IN_LIB);
-    assert(B<long>().where() == IN_LIB);
-    assert(B<float>().where() == IN_MAIN);
+    assert_eq(B<int>().where() , IN_LIB);
+    assert_eq(B<long>().where() , IN_LIB);
+    assert_eq(B<float>().where() , IN_MAIN);
 
-    assert(C<int>().where() == IN_MAIN); // !
-    assert(C<long>().where() == IN_LIB);
-    assert(C<float>().where() == IN_MAIN);
+    assert_eq(C<int>().where() , IN_MAIN); // !
+    assert_eq(C<long>().where() , IN_LIB);
+    assert_eq(C<float>().where() , IN_MAIN);
+
+    cout << "done" << endl;
 
     return 0;
 }
