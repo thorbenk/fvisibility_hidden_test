@@ -1,40 +1,66 @@
 #pragma once
 
+// figure out which code is executed.
+// When testlib is compiled, the `where` functions will return 0
+//
+// When template functions are instantiated from within the main function,
+// we redefine `DEFINED_WHERE`.
+#ifndef DEFINED_WHERE
+#define DEFINED_WHERE 0
+#endif
+
 #include <testlib_export.h>
 
 #include <iostream>
+using namespace std;
+
+//-----------------------------------------------------------------------------
 
 class TESTLIB_EXPORT TestLib
 {
 public:
-    static void test_static();
-    void test();
-private:
-    int mInt;
+    static int where_static();
+    int where();
 };
 
-// Export each explicit template instantiation
+//-----------------------------------------------------------------------------
+
+// template class itself not exported
+// but each explicit template instantiation is exported
 template<typename T>
-class TemplateExportClass {
+class A{
 public:
-    TemplateExportClass() { std::cout << sizeof(T) << std::endl; }
+    int where() {
+        return DEFINED_WHERE;
+    }
 };
-template class TESTLIB_EXPORT TemplateExportClass<int>;
-template class TESTLIB_EXPORT TemplateExportClass<long>;
+extern template class TESTLIB_EXPORT A<int>;
+extern template class TESTLIB_EXPORT A<long>;
+
+//-----------------------------------------------------------------------------
+
+// template class itself is annotated as exported
+// explicit template instantiations are not annotated
+template<typename T>
+class TESTLIB_EXPORT B {
+public:
+    int where() {
+        return DEFINED_WHERE;
+    }
+};
+extern template class B<int>;
+extern template class B<long>;
+
+//-----------------------------------------------------------------------------
 
 // Export all template instantiations
 template<typename T>
-class TESTLIB_EXPORT TemplateExportExplicitInstantiation {
+class TESTLIB_EXPORT C {
 public:
-    TemplateExportExplicitInstantiation() { std::cout << sizeof(T) << std::endl; }
+    int where() {
+        return DEFINED_WHERE;
+    }
 };
-template class TemplateExportExplicitInstantiation<int>;
-template class TemplateExportExplicitInstantiation<long>;
-// not allowed: duplicate explicit instantiation of ‘class TestTemplate2<int>’
-// template class TestTemplate2<int>;
-
-template<typename T>
-class TESTLIB_EXPORT TemplateNoExplicitInstantiation {
-public:
-    TemplateNoExplicitInstantiation() { std::cout << sizeof(T) << std::endl; }
-};
+template class C<int>;
+extern template class C<long>;
+// C<long> is instantiated in .cpp file

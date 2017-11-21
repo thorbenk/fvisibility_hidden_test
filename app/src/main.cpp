@@ -1,25 +1,31 @@
+// figure out if we instantiate a template here
+// or reuse the generated code from the lib */
+#define DEFINED_WHERE 1
 #include <testlib.h>
 
-// exported in `testlib`, so we do not have to instantiate here
-extern template class TemplateExportClass<int>;
+#include <iostream>
+#include <cassert>
+using namespace std;
 
-// does not work, becaues `testlib` does not export the `float` instantiation!
-// extern template class TemplateExportClass<float>;
+#define IN_LIB  0
+#define IN_MAIN 1
 
-int main()
-{
+int main() {
     TestLib t;
+    assert(t.where() == IN_LIB);
+    assert(TestLib::where_static() == IN_LIB);
 
-    t.test();
-    TestLib::test_static();
+    assert(A<int>().where() == IN_LIB);
+    assert(A<long>().where() == IN_LIB);
+    assert(A<float>().where() == IN_MAIN);
 
-    TemplateExportClass<int>();    // from lib
-    TemplateExportClass<long>();   // from lib
-    TemplateExportClass<float>();  // instantiated here
+    assert(B<int>().where() == IN_LIB);
+    assert(B<long>().where() == IN_LIB);
+    assert(B<float>().where() == IN_MAIN);
 
-    TemplateExportExplicitInstantiation<int>(); // from lib
-    TemplateNoExplicitInstantiation<long>();    // from lib
-    TemplateNoExplicitInstantiation<float>();   // instantiated here
+    assert(C<int>().where() == IN_MAIN); // !
+    assert(C<long>().where() == IN_LIB);
+    assert(C<float>().where() == IN_MAIN);
 
     return 0;
 }

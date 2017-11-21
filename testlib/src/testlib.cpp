@@ -4,13 +4,21 @@
 
 using namespace std;
 
-void TestLib::test() {
-    cout << "TestLib::test()" << endl;
+int TestLib::where() {
+    return DEFINED_WHERE;
 }
 
-void TestLib::test_static()
+int TestLib::where_static()
 {
-    cout << "TestLib::test_static()" << endl;
+    return DEFINED_WHERE;
 }
+
+template class A<int>;
+template class A<long>;
+
+template class B<int>;
+template class B<long>;
+
+template class C<long>;
 
 
