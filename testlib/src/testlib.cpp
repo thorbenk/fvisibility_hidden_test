@@ -20,4 +20,9 @@ template class B<long>;
 
 template class C<long>;
 
+template<>
+int D<int>::where() {
+  return 2;
+}
 
+template struct D<int>;

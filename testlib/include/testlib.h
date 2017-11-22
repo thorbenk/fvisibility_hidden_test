@@ -65,3 +65,17 @@ public:
 };
 template class C<int>;
 // C<long> is instantiated in .cpp file and declared extern in main.cpp
+
+//-----------------------------------------------------------------------------
+
+template<typename T>
+struct TESTLIB_EXPORT D {
+  int where() {
+    return DEFINED_WHERE;
+  }
+};
+
+// forward declare a specialization
+template<> int D<int>::where();
+
+extern template struct D<int>;
