@@ -115,3 +115,11 @@ struct TESTLIB_EXPORT E {
 };
 
 extern template struct E<int>;
+
+//-----------------------------------------------------------------------------
+
+namespace Static {
+
+extern TESTLIB_EXPORT int staticInt;
+
+} /* namespace Static */

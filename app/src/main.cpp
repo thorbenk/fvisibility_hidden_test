@@ -46,6 +46,8 @@ int main() {
     assert_eq(D<float>().where_impl_h() , IN_MAIN);
     assert_eq(D<float>().where_specialized_int_impl_h() , IN_MAIN);
     assert_eq(D<float>().where_specialized_int_impl_cpp() , IN_MAIN);
+
+    assert_eq(Static::staticInt, 42);
     cout << "done" << endl;
 
     E<int> e;

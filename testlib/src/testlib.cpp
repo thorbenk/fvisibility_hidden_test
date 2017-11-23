@@ -30,3 +30,5 @@ template struct D<int>;
 template<typename T>
 E<T>::E() {}
 template struct E<int>;
+
+int Static::staticInt = 42;
