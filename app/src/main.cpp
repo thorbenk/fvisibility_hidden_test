@@ -40,10 +40,16 @@ int main() {
     assert_eq(C<long>().where() , IN_LIB);
     assert_eq(C<float>().where() , IN_MAIN);
 
-    assert_eq(D<int>().where() , IN_LIB_SPECIALIZATION);
-    assert_eq(D<float>().where() , IN_MAIN);
-
+    assert_eq(D<int>().where_impl_h() , IN_LIB);
+    assert_eq(D<int>().where_specialized_int_impl_h() , IN_LIB_SPECIALIZATION);
+    assert_eq(D<int>().where_specialized_int_impl_cpp() , IN_LIB_SPECIALIZATION);
+    assert_eq(D<float>().where_impl_h() , IN_MAIN);
+    assert_eq(D<float>().where_specialized_int_impl_h() , IN_MAIN);
+    assert_eq(D<float>().where_specialized_int_impl_cpp() , IN_MAIN);
     cout << "done" << endl;
+
+    E<int> e;
+    //E<float> eF; // ==> undefined reference to `E<float>::E()`
 
     return 0;
 }
