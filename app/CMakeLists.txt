@@ -5,3 +5,5 @@ add_executable(app
 target_link_libraries(app
     testlib
 )
+
+add_test(app app)

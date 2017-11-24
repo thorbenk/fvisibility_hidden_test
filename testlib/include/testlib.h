@@ -14,6 +14,19 @@
 #include <iostream>
 using namespace std;
 
+#if defined(TESTLIB_EXPORT) && defined(testlib_EXPORTS)
+  #if (defined(__GNUC__) || defined(__clang__))
+      #define EXPORT_TEMPLATE TESTLIB_EXPORT
+      #define EXPORT_INSTANTIATE
+  #else
+      #define EXPORT_TEMPLATE
+      #define EXPORT_INSTANTIATE TESTLIB_EXPORT
+  #endif
+#elif defined(TESTLIB_NO_EXPORT)
+  #define EXPORT_TEMPLATE TESTLIB_EXPORT
+  #define EXPORT_INSTANTIATE
+#endif
+
 //-----------------------------------------------------------------------------
 
 class TESTLIB_EXPORT TestLib
@@ -37,15 +50,15 @@ public:
         return DEFINED_WHERE;
     }
 };
-extern template class TESTLIB_EXPORT A<int>;
-extern template class TESTLIB_EXPORT A<long>;
+extern template class EXPORT_TEMPLATE A<int>;
+extern template class EXPORT_TEMPLATE A<long>;
 
 //-----------------------------------------------------------------------------
 
 // template class itself is annotated as exported
 // explicit template instantiations are not annotated
 template<typename T>
-class TESTLIB_EXPORT B {
+class B {
 public:
     B() : mInt(0) {}
 
@@ -55,8 +68,8 @@ public:
 private:
     int mInt;
 };
-extern template class B<int>;
-extern template class B<long>;
+extern template class EXPORT_TEMPLATE B<int>;
+extern template class EXPORT_TEMPLATE B<long>;
 
 //-----------------------------------------------------------------------------
 
@@ -76,7 +89,7 @@ public:
 private:
     int* mIntP;
 };
-template class C<int>;
+template class EXPORT_TEMPLATE C<int>;
 // C<long> is instantiated in .cpp file and declared extern in main.cpp
 
 //-----------------------------------------------------------------------------
@@ -110,11 +123,11 @@ extern template struct D<int>;
 //-----------------------------------------------------------------------------
 
 template<typename T>
-struct TESTLIB_EXPORT E {
+struct E {
   E();
 };
 
-extern template struct E<int>;
+extern template struct EXPORT_TEMPLATE E<int>;
 
 //-----------------------------------------------------------------------------
 

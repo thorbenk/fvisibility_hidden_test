@@ -12,20 +12,20 @@ int TestLib::where_static() {
     return DEFINED_WHERE;
 }
 
-template class A<int>;
-template class A<long>;
+template class EXPORT_INSTANTIATE A<int>;
+template class EXPORT_INSTANTIATE A<long>;
 
-template class B<int>;
-template class B<long>;
+template class EXPORT_INSTANTIATE B<int>;
+template class EXPORT_INSTANTIATE B<long>;
 
-template class C<long>;
+template class EXPORT_INSTANTIATE C<long>;
 
 template<>
 int D<int>::where_specialized_int_impl_cpp() {
   return 2;
 }
 
-template struct D<int>;
+template EXPORT_INSTANTIATE struct D<int>;
 
 template<typename T>
 E<T>::E() {}
