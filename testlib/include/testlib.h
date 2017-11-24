@@ -32,6 +32,7 @@ public:
 template<typename T>
 class A{
 public:
+    A() = default;
     int where() {
         return DEFINED_WHERE;
     }
@@ -46,9 +47,13 @@ extern template class TESTLIB_EXPORT A<long>;
 template<typename T>
 class TESTLIB_EXPORT B {
 public:
+    B() : mInt(0) {}
+
     int where() {
         return DEFINED_WHERE;
     }
+private:
+    int mInt;
 };
 extern template class B<int>;
 extern template class B<long>;
@@ -59,9 +64,62 @@ extern template class B<long>;
 template<typename T>
 class TESTLIB_EXPORT C {
 public:
+    C() {
+      mIntP = new int();
+    }
+    ~C() {
+      delete mIntP;
+    }
     int where() {
         return DEFINED_WHERE;
     }
+private:
+    int* mIntP;
 };
 template class C<int>;
 // C<long> is instantiated in .cpp file and declared extern in main.cpp
+
+//-----------------------------------------------------------------------------
+
+template<typename T>
+struct TESTLIB_EXPORT D {
+  D() {
+    mWhere = DEFINED_WHERE;
+  }
+  int where_impl_h() {
+    return DEFINED_WHERE;
+  }
+  int where_specialized_int_impl_h() {
+    return DEFINED_WHERE;
+  }
+  int where_specialized_int_impl_cpp() {
+    return DEFINED_WHERE;
+  }
+private:
+  int mWhere;
+};
+
+template<> int D<int>::where_specialized_int_impl_h() {
+  return 2;
+}
+// forward declare a specialization
+template<> int D<int>::where_specialized_int_impl_cpp();
+
+extern template struct D<int>;
+
+//-----------------------------------------------------------------------------
+
+template<typename T>
+struct TESTLIB_EXPORT E {
+  E();
+};
+
+extern template struct E<int>;
+
+//-----------------------------------------------------------------------------
+
+namespace Static {
+
+extern TESTLIB_EXPORT int staticInt;
+
+} /* namespace Static */

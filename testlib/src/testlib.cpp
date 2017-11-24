@@ -20,4 +20,15 @@ template class B<long>;
 
 template class C<long>;
 
+template<>
+int D<int>::where_specialized_int_impl_cpp() {
+  return 2;
+}
 
+template struct D<int>;
+
+template<typename T>
+E<T>::E() {}
+template struct E<int>;
+
+int Static::staticInt = 42;

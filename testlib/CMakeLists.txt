@@ -3,6 +3,7 @@ project(testlib VERSION 0.1 LANGUAGES CXX)
 add_library(testlib SHARED
     src/testlib_p.cpp
     src/testlib.cpp
+    include/testlib.h
 )
 
 include(GenerateExportHeader)
