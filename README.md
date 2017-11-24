@@ -1,4 +1,4 @@
-# -fvisiblity=hidden example project (cmake)
+# -fvisibility=hidden example project (cmake)
 
 A simple CMake project consisting of a shared library and an executable
 linked to that library. Uses `-fvisibility=hiden` and
