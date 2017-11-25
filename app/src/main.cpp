@@ -20,8 +20,6 @@ using namespace std;
   } \
 }
 
-extern template class C<long>;
-
 int main() {
     TestLib t;
     assert_eq(TestLib::where_static() , IN_LIB);
@@ -36,16 +34,12 @@ int main() {
     assert_eq(B<long>().where() , IN_LIB);
     assert_eq(B<float>().where() , IN_MAIN);
 
-    assert_eq(C<int>().where() , IN_MAIN); // !
-    assert_eq(C<long>().where() , IN_LIB);
+    assert_eq(C<int>().where() , IN_LIB);
+    assert_eq(C<long>().where() , IN_MAIN);
     assert_eq(C<float>().where() , IN_MAIN);
 
-    assert_eq(D<int>().where_impl_h() , IN_LIB);
-    assert_eq(D<int>().where_specialized_int_impl_h() , IN_LIB_SPECIALIZATION);
-    assert_eq(D<int>().where_specialized_int_impl_cpp() , IN_LIB_SPECIALIZATION);
-    assert_eq(D<float>().where_impl_h() , IN_MAIN);
-    assert_eq(D<float>().where_specialized_int_impl_h() , IN_MAIN);
-    assert_eq(D<float>().where_specialized_int_impl_cpp() , IN_MAIN);
+    assert_eq(D<int>().where() , IN_MAIN);
+    assert_eq(D<long>().where() , IN_MAIN);
 
     assert_eq(Static::staticInt, 42);
     cout << "done" << endl;

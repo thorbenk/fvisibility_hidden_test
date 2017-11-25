@@ -75,7 +75,7 @@ extern template class EXPORT_TEMPLATE B<long>;
 
 // Export all template instantiations
 template<typename T>
-class TESTLIB_EXPORT C {
+class C {
 public:
     C() {
       mIntP = new int();
@@ -89,36 +89,19 @@ public:
 private:
     int* mIntP;
 };
-template class EXPORT_TEMPLATE C<int>;
-// C<long> is instantiated in .cpp file and declared extern in main.cpp
+extern template class EXPORT_TEMPLATE C<int>;
 
 //-----------------------------------------------------------------------------
 
 template<typename T>
-struct TESTLIB_EXPORT D {
-  D() {
-    mWhere = DEFINED_WHERE;
-  }
-  int where_impl_h() {
-    return DEFINED_WHERE;
-  }
-  int where_specialized_int_impl_h() {
-    return DEFINED_WHERE;
-  }
-  int where_specialized_int_impl_cpp() {
-    return DEFINED_WHERE;
-  }
-private:
-  int mWhere;
+struct D {
+  int where() { return DEFINED_WHERE; }
 };
 
-template<> int D<int>::where_specialized_int_impl_h() {
-  return 2;
-}
-// forward declare a specialization
-template<> int D<int>::where_specialized_int_impl_cpp();
-
-extern template struct D<int>;
+template<>
+struct D<int> {
+  int where() { return DEFINED_WHERE; }
+};
 
 //-----------------------------------------------------------------------------
 
