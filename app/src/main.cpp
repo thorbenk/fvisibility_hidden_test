@@ -26,15 +26,29 @@ int main() {
     assert_eq(t.where() , IN_LIB);
     assert_eq(t.where_inline() , IN_MAIN);
 
+#ifndef NDEBUG
     assert_eq(A<int>().where() , IN_LIB);
     assert_eq(A<long>().where() , IN_LIB);
+#else
+    assert_eq(A<int>().where() , IN_MAIN);
+    assert_eq(A<long>().where() , IN_MAIN);
+#endif
     assert_eq(A<float>().where() , IN_MAIN);
 
+#ifndef NDEBUG
     assert_eq(B<int>().where() , IN_LIB);
     assert_eq(B<long>().where() , IN_LIB);
+#else
+    assert_eq(B<int>().where() , IN_MAIN);
+    assert_eq(B<long>().where() , IN_MAIN);
+#endif
     assert_eq(B<float>().where() , IN_MAIN);
 
+#ifndef NDEBUG
     assert_eq(C<int>().where() , IN_LIB);
+#else
+    assert_eq(C<int>().where() , IN_MAIN);
+#endif
     assert_eq(C<long>().where() , IN_MAIN);
     assert_eq(C<float>().where() , IN_MAIN);
 
