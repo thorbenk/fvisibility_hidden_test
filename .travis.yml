@@ -1,0 +1,39 @@
+sudo: false
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      compiler: gcc
+      addons: &gcc6
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+        env: COMPILER='g++-6' BUILD_TYPE='Debug'
+
+    - os: linux
+      compiler: gcc
+      addons: *gcc6
+      env: COMPILER='g++-6' BUILD_TYPE='Release'
+
+    - os: linux
+      compiler: clang
+      addons: &clang50
+        apt:
+          sources: ['llvm-toolchain-trusty-5.0', 'ubuntu-toolchain-r-test']
+          packages: ['clang-5.0']
+      env: COMPILER='clang++-5.0' BUILD_TYPE='Debug'
+
+    - os: linux
+      compiler: clang
+      addons: *clang50
+      env: COMPILER='clang++-5.0' BUILD_TYPE='Release'
+
+before_script:
+  - export CXX=${COMPILER}
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} .
+
+script:
+  - cmake --build . 
+  - ctest .
+
