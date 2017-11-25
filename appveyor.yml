@@ -16,7 +16,7 @@ before_build:
     - cmake -G "Visual Studio 15 2017 Win64" -H. -Bbuild
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
+  project: $(APPVEYOR_BUILD_FOLDER)\build\$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
   - cd build
