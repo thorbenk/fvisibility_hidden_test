@@ -9,7 +9,7 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-6']
-        env: COMPILER='g++-6' BUILD_TYPE='Debug'
+      env: COMPILER='g++-6' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -30,6 +30,7 @@ matrix:
       env: COMPILER='clang++-5.0' BUILD_TYPE='Release'
 
 before_script:
+  - export CTEST_OUTPUT_ON_FAILURE=1
   - export CXX=${COMPILER}
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} .
 
