@@ -22,6 +22,6 @@ template class EXPORT_INSTANTIATE C<int>;
 
 template<typename T>
 E<T>::E() {}
-template struct E<int>;
+template struct EXPORT_INSTANTIATE E<int>;
 
 int Static::staticInt = 42;
