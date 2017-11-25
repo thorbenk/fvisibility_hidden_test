@@ -9,10 +9,14 @@ configuration:
   - Release
   - Debug
 
+environment:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
 install:
     - git submodule update --init --recursive
 
 before_build:
+    - cmake --version
     - cmake -G "Visual Studio 15 2017 Win64" -H. -Bbuild
 
 build:
