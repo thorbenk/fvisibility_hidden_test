@@ -24,7 +24,11 @@ int main() {
     TestLib t;
     assert_eq(TestLib::where_static() , IN_LIB);
     assert_eq(t.where() , IN_LIB);
+#if !defined(NDEBUG) && defined(_MSC_VER)
+    assert_eq(t.where_inline() , IN_LIB);
+#else
     assert_eq(t.where_inline() , IN_MAIN);
+#endif
 
 #ifndef NDEBUG
     assert_eq(A<int>().where() , IN_LIB);
