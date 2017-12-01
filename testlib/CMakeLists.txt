@@ -4,7 +4,9 @@ add_library(testlib SHARED
     src/testlib_p.cpp
     src/testlib.cpp
     src/use_vec.cpp
+    src/vec.i
     include/testlib.h
+    include/testlib_template_export.h
     include/vec.h
 )
 set_target_properties(testlib PROPERTIES

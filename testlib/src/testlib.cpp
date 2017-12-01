@@ -6,7 +6,7 @@
 
 // generate code for vec<int>
 // so it is available to users of this library
-template struct vec<int>;
+//template struct vec<int>;
 
 using namespace std;
 
@@ -33,5 +33,7 @@ template struct EXPORT_INSTANTIATE E<int>;
 template<> int E<int>::s = 42;
 
 int Static::staticInt = 42;
+
+template struct EXPORT_INSTANTIATE vec<int>;
 
 

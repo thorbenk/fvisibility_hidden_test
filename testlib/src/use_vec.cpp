@@ -1,4 +1,5 @@
 #include <vec.h>
+// note: NOT including "vec.i" here!
 
 void use_vec() {
     vec<int> v;

@@ -7,6 +7,8 @@
 #include <cassert>
 using namespace std;
 
+#include <vec.h>
+
 #define IN_LIB  0
 #define IN_MAIN 1
 #define IN_LIB_SPECIALIZATION 2
@@ -64,6 +66,12 @@ int main() {
 
     E<int> e;
     //E<float> eF; // ==> undefined reference to `E<float>::E()`
+   
+    {
+        vec<int> v;
+        int x = v.getX();
+        int y = v.getY();
+    }
 
     return 0;
 }
