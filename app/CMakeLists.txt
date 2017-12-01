@@ -1,9 +1,9 @@
-add_executable(app
+add_executable(main
     src/main.cpp
 )
 
-target_link_libraries(app
+target_link_libraries(main
     testlib
 )
 
-add_test(app app)
+add_test(NAME main COMMAND $<TARGET_FILE:main>)
