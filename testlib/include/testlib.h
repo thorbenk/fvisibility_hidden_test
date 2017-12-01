@@ -108,7 +108,15 @@ struct D<int> {
 template<typename T>
 struct E {
   E();
+
+  T get() { return s; }
+
+  static T s;
 };
+
+#ifdef __clang__
+template<> int E<int>::s;
+#endif
 
 extern template struct EXPORT_TEMPLATE E<int>;
 
