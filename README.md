@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/thorbenk/fvisibility_hidden_test.svg?branch=master)](https://travis-ci.org/thorbenk/fvisibility_hidden_test) [![Build status](https://ci.appveyor.com/api/projects/status/71v4m0jlf1nn9u3u?svg=true)](https://ci.appveyor.com/project/thorbenk/fvisibility-hidden-test)
 
 A simple CMake project consisting of a shared library and an executable
-linked to that library. Uses `-fvisibility=hiden` and
+linked to that library. Uses `-fvisibility=hidden` and
 `-fvisiblity-inlines-hidden`.
 
 Gives some examples how to export explicit template instantiations
