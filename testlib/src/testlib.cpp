@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+#include <vec.i>
+
+// generate code for vec<int>
+// so it is available to users of this library
+template struct vec<int>;
+
 using namespace std;
 
 int TestLib::where() {
@@ -27,3 +33,5 @@ template struct EXPORT_INSTANTIATE E<int>;
 template<> int E<int>::s = 42;
 
 int Static::staticInt = 42;
+
+

@@ -3,7 +3,9 @@ project(testlib VERSION 0.1 LANGUAGES CXX)
 add_library(testlib SHARED
     src/testlib_p.cpp
     src/testlib.cpp
+    src/use_vec.cpp
     include/testlib.h
+    include/vec.h
 )
 set_target_properties(testlib PROPERTIES
     CMAKE_CXX_VISIBILITY_PRESET hidden
